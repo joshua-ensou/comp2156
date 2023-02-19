@@ -1,21 +1,30 @@
+`
 language: node_js
 node_js:
-  - 8
+  - "stable"
+
+branches:
+  only:
+  - master
+
+cache:
+  directories:
+  - node_modules
+
 install:
-  - npm install -g zcatalyst-cli
-jobs:
-  include:
-    - stage: functions
-      before_script:
-        - cd functions/catly/server
-      script:
-        - echo 'function!!'
-        - echo 'Installing Deps!'
-        - npm install
-      after_success:
-        - echo 'deploying function!'
-        - catalyst deploy --only functions --project 700000000045014 --verbose
-    - stage: client
-      script:
-        - echo 'deploying client!!'
-	    - catalyst deploy --only client --project700000000045014 --verbose
+  - npm install
+  - npm install -g yarn
+
+script:
+  #- yarn lint
+  - yarn build
+  - mv build/index.html build/404.html
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: build
+  on:
+    branch: master
+
+`
