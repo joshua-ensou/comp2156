@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "16.0.0"
+  - "stable"
 
 branches:
   only:
@@ -11,7 +11,7 @@ cache:
   - node_modules
 
 install:
-  - nvm install 16.0.0
+  - nvm install
   - npm install -g yarn
 
 script:
@@ -25,4 +25,3 @@ deploy:
   local_dir: build
   on:
     branch: main
-    
