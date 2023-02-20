@@ -4,7 +4,7 @@ node_js:
   - 16.0.0
 branches:
   only:
-    - master
+    - dep-inclusion
 cache:
   directories:
     - node_modules
